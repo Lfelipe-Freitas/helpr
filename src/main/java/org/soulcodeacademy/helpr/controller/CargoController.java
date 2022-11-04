@@ -3,9 +3,7 @@ package org.soulcodeacademy.helpr.controller;
 import org.soulcodeacademy.helpr.domain.Cargo;
 import org.soulcodeacademy.helpr.services.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +32,13 @@ public class CargoController {
     public Cargo getCargo(@PathVariable Integer idCargo){
         // @PathVariable => extrai do endpoint o valor dinamico
         return this.cargoService.getCargo(idCargo); // JSON
+    }
+
+    // Podemos usar o mesmo endpoint para verbos diferentes.
+    @PostMapping("/cargos") // Requisição tipo POST para /cargos
+    public Cargo salvar(@RequestBody Cargo cargo){
+        // @Requestbody extrai o JSON do corpo e converte para cargo (deserialização
+        Cargo salvo = this.cargoService.salvar(cargo);
+        return salvo;
     }
 }

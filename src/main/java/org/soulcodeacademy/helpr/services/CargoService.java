@@ -14,7 +14,7 @@ public class CargoService {
     @Autowired
     private CargoRepository cargoRepository;
 
-    // Listar todos.Salvar. Atualizar. Deletar.
+    // Listar todos. Atualizar. Deletar.
     public List<Cargo> listar(){
         // Retorna os dados da tabela em forma de lista.
         return this.cargoRepository.findAll();
@@ -32,5 +32,13 @@ public class CargoService {
         } else {
             return cargo.get(); // Extrair o cargo de dentro do optional.
         }
+    }
+
+    //Salvar.
+    public Cargo salvar(Cargo novoCargo){
+        novoCargo.setIdCargo(null); // Limpar o campo id para não substituir dados
+        // INSERT INTO cargo
+        Cargo cargoSalvo = this.cargoRepository.save(novoCargo);
+        return cargoSalvo;
     }
 }
