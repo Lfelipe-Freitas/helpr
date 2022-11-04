@@ -37,8 +37,21 @@ public class CargoController {
     // Podemos usar o mesmo endpoint para verbos diferentes.
     @PostMapping("/cargos") // Requisição tipo POST para /cargos
     public Cargo salvar(@RequestBody Cargo cargo){
-        // @Requestbody extrai o JSON do corpo e converte para cargo (deserialização
+        // @Requestbody extrai o JSON do corpo e converte para cargo (deserialização)
         Cargo salvo = this.cargoService.salvar(cargo);
         return salvo;
+    }
+
+    // Mapeia requisições do verbo PUT
+    @PutMapping("/cargos/{idCargo}")
+    public Cargo atualizar(@PathVariable Integer idCargo, @RequestBody Cargo cargo){
+
+        Cargo atualizar = this.cargoService.atualizar(idCargo, cargo);
+        return atualizar; // Resposta para o cliente (cargo atualizado)
+    }
+
+    @DeleteMapping("/cargos/{idCargo}")
+    public void delete(@PathVariable Integer idCargo){
+        this.cargoService.deletar(idCargo);
     }
 }

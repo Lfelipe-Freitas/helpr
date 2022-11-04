@@ -14,7 +14,7 @@ public class CargoService {
     @Autowired
     private CargoRepository cargoRepository;
 
-    // Listar todos. Atualizar. Deletar.
+    // Listar todos.
     public List<Cargo> listar(){
         // Retorna os dados da tabela em forma de lista.
         return this.cargoRepository.findAll();
@@ -40,5 +40,26 @@ public class CargoService {
         // INSERT INTO cargo
         Cargo cargoSalvo = this.cargoRepository.save(novoCargo);
         return cargoSalvo;
+    }
+
+    //Atualizar.
+    public Cargo atualizar(Integer idCargo, Cargo novoCargo){
+        // Verificar se o cargo existe mesmo
+        Cargo cargoAtual = this.getCargo(idCargo);
+
+        cargoAtual.setNome(novoCargo.getNome());
+        cargoAtual.setDescricao(novoCargo.getDescricao());
+        cargoAtual.setSalario(novoCargo.getSalario());
+
+        // Atualiza a entidade pois ela possui um ID diferente de nulo
+        Cargo atualizado = this.cargoRepository.save(cargoAtual);
+        return atualizado;
+    }
+
+    //Deletar.
+    public void deletar(Integer idCargo){
+        Cargo cargo = this.getCargo(idCargo);
+
+        this.cargoRepository.delete(cargo);
     }
 }
