@@ -1,13 +1,11 @@
 package org.soulcodeacademy.helpr.repositories;
 
-import org.soulcodeacademy.helpr.domain.Cargo;
+import org.soulcodeacademy.helpr.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface CargoRepository extends JpaRepository<Cargo, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 }
 
 /*
@@ -22,3 +20,5 @@ OBS: o Spring gera uma classe dinamica com base em nossa interface Cargo
     -save (Entidade) => INSERT INTO(caso id nulo) ou UPDATE (caso id nao nulo)
     -delete (Entidade) => DELETE FROM usuarios where id = ?;
  */
+// CRUD de funcionarios
+// ordem de criação: Entidade -> Repository -> DTO -> Service + Controller
