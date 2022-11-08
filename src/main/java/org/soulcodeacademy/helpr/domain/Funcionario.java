@@ -14,7 +14,7 @@ public class Funcionario extends Usuario {
     private String foto;
 
     @ManyToOne
-    @JoinColumn(name = "idCargo") // Cria uma coluna nov que é a chave estrangeira do Cargo
+    @JoinColumn(name = "id_cargo") // Cria uma coluna nov que é a chave estrangeira do Cargo
     private Cargo cargo;
 
     public Funcionario(){}
@@ -23,12 +23,6 @@ public class Funcionario extends Usuario {
         super(id, nome, email, cpf, senha, Perfil.FUNCIONARIO);
         this.cargo = cargo;
         this.foto = foto;
-    }
-
-    public Funcionario(Integer id, String nome, String email, String cpf, String senha, Perfil perfil, String foto, Cargo cargo) {
-        super(id, nome, email, cpf, senha, perfil);
-        this.foto = foto;
-        this.cargo = cargo;
     }
 
     public String getFoto() {
