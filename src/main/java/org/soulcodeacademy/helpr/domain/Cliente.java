@@ -2,14 +2,12 @@ package org.soulcodeacademy.helpr.domain;
 
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cliente extends Usuario{
 
+    @Column(length = 25)
     private String telefone;
 
     public Cliente(){}

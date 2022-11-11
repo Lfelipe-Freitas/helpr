@@ -1,5 +1,7 @@
 package org.soulcodeacademy.helpr.domain.dto;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +16,7 @@ public abstract class UsuarioDTO {
     @NotBlank(message = "Email invalido")
     protected String email;
 
+    @CPF(message = "CPF é invalido")
     @NotBlank(message = "CPF é obrigatório")
     protected String cpf;
 
