@@ -17,7 +17,7 @@ public class DevConfig {
     @Autowired
     private PopulateService populateService;
 
-    @Value("${spring.jpa.hibernate.ddl-auto}") // vai acesar a propriedade
+    @Value("${spring.jpa.hibernate.ddl-auto}") // vai acessar a propriedade
     private String ddlAuto;
 
     @PostConstruct // faz com que o metodo execute após a instancia ser criada, ou seja, após construir o DevConfig, executa o metodo abaixo
