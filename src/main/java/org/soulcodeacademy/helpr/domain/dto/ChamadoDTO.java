@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 public class ChamadoDTO {
     @NotBlank(message = "Titulo é obrigatório")
-    private String tiulo;
+    private String titulo;
     @NotBlank(message = "Descrição é obrigatório")
     private String descricao;
 
@@ -18,12 +18,12 @@ public class ChamadoDTO {
 
     private Status status;
 
-    public String getTiulo() {
-        return tiulo;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTiulo(String tiulo) {
-        this.tiulo = tiulo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescricao() {
