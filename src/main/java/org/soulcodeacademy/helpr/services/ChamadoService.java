@@ -9,6 +9,7 @@ import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -49,8 +50,31 @@ public class ChamadoService {
 
         Cliente cliente = this.clienteService.getCliente(dto.getIdCliente());
 
-        Funcionario funcionario = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
-        chamado.setFuncionario(funcionario);
+        if(dto.getIdFuncionario() == null){
+            throw new RuntimeException("idFuncionario obrigatório");
+        } else {
+            Funcionario funcionario = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
+
+            switch (dto.getStatus()) {
+
+                case RECEBIDO -> {
+                    chamado.setStatus(Status.RECEBIDO);
+                    chamado.setFuncionario(null);
+                    chamado.setDataFechamento(null);
+                }
+                case ATRIBUIDO -> {
+                    chamado.setStatus(Status.ATRIBUIDO);
+                    chamado.setFuncionario(funcionario);
+                    chamado.setDataFechamento(null);
+                }
+                case CONCLUIDO -> {
+                    chamado.setStatus(Status.CONCLUIDO);
+                    chamado.setFuncionario(funcionario);
+                    chamado.setDataFechamento(LocalDate.now());
+                }
+            }
+        }
+
         chamado.setStatus(dto.getStatus());
         chamado.setDescricao(dto.getDescricao());
         chamado.setTitulo(dto.getTitulo());
@@ -58,10 +82,21 @@ public class ChamadoService {
         return this.chamadoRepository.save(chamado);
     }
 
-    public void deletar(Integer idChamado){
-        Chamado chamado = this.getChamado(idChamado);
-
-        this.chamadoRepository.delete(chamado);
+    public List<Chamado> listarPorStatus(Status status){
+        return this.chamadoRepository.findByStatus(status);
     }
 
+    public List<Chamado> listarPorFuncionario(Integer idFuncionario) {
+        Funcionario funcionario = this.funcionarioService.getFuncionario(idFuncionario);
+        return this.chamadoRepository.findByFuncionario(funcionario);
+    }
+
+    public List<Chamado> listarPorCliente(Integer idCliente) {
+        Cliente cliente = this.clienteService.getCliente(idCliente);
+        return this.chamadoRepository.findByCliente(cliente);
+    }
+
+    public List<Chamado> listarPorIntervaloDatas(LocalDate date1, LocalDate date2){
+        return this.chamadoRepository.buscarEntreDatas(date1, date2);
+    }
 }

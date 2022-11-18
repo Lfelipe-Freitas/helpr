@@ -4,9 +4,20 @@ import org.soulcodeacademy.helpr.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+     Optional<Usuario> findByEmail(String email); // Where email = email
+
+     Optional<Usuario> findByCpf(String cpf); // Where cpf = cpf
+
+     List<Usuario> findByNomeContaining(String busca); // Filtrar pelo nome
 }
+
+// Seguindo a convenção findBy o Spring implementa o método derivado/customizado
+// Obs: Optional = 1 resultado. Varios = LIST
 
 /*
  -> Repository é um recurso que permite manipular a entidade no banco de dados. Pode Adicionar entidades, atualizar entidades, remover entidades e listar (CRUD).

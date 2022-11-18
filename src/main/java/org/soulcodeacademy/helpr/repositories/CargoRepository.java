@@ -5,9 +5,24 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo, Integer> {
+     List<Cargo> findByNome(String valor); // Where nome = valor
+
+     List<Cargo> findBySalario(Double valor); // Where salario = valor
+
+     List<Cargo> findBySalarioGreaterThan(Double valor); // Where salario > valor
+
+     List<Cargo> findBySalarioGreaterThanEqual(Double valor); // Where salario >= valor
+
+     List<Cargo> findBySalarioLessThan(Double valor); // Where salario < valor
+
+     List<Cargo> findBySalarioLessThanEqual(Double valor); // Where salario <= valor
+
+     List<Cargo> findBySalarioBetween(Double valor1, Double valor2); // WHERE salario entre valor1 e valor 2
 }
 
 /*
