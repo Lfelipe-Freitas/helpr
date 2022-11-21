@@ -20,6 +20,12 @@ public class FuncionarioController {
         return funcionarioService.listar();
     }
 
+    // @RequestParam = Captura os valores de parâmetro após ?, ex: /funcionarios/salario?valor1=1000&valor2=2000
+    @GetMapping("/funcionario/salario")
+    List<Funcionario> listarPorFaixaSalarial(@RequestParam Double valor1, @RequestParam Double valor2) {
+        return this.funcionarioService.listarPorFaixaSalarial(valor1, valor2);
+    }
+
     @GetMapping("/funcionarios/{id}")
     public Funcionario getCFuncionario(@PathVariable Integer id) {
         return this.funcionarioService.getFuncionario(id);
